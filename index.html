@@ -9,19 +9,14 @@
 	<title>Reservations Widget Loader</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<meta name="description" content="">
-	<meta name="author" content="">
+	<meta name="description" content="Reservations loading plugin.">
+	<meta name="author" content="Chocksy,EpicCoders">
 
 	<style type="text/css">
 		body{
 			height: 1000px;
 		}	
 	</style>
-
-	<script type="text/javascript">
-            var current_domain = 'localhost/tablebookings-widget/';
-  	</script>		
-
 
 </head>
 <body>
@@ -32,11 +27,14 @@
   	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   	<script type="text/javascript">
     var _lopts = _lopts || [];
-        _lopts.widget_domain = "http://"+current_domain;
+        _lopts.widget_domain = "http://localhost/tablebookings-widget/";
+
+    var local_script = "localhost/tablebookings-widget/loader.js";
+    var s3_script    = "s3-eu-west-1.amazonaws.com/epic-plugins/loader.js";
 
     (function() {
         var loader = document.createElement('script'); loader.type = 'text/javascript'; loader.async = true;
-        loader.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + current_domain +'loader.js';
+        loader.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + s3_script;
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(loader, s);
     })();
 	</script>       
