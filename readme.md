@@ -18,7 +18,7 @@ Then after adding the jQuery script add the following script below that:
 
 	    (function() {
 	        var loader = document.createElement('script'); loader.type = 'text/javascript'; loader.async = true;
-	        loader.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'd1u2f2r665j4oh.cloudfront.net/loader.js';
+	        loader.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'd1u2f2r665j4oh.cloudfront.net/loader-v1.0.js';
 	        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(loader, s);
 	    })();
 	</script>   
