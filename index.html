@@ -16,13 +16,19 @@
 		body{
 			height: 1000px;
 		}	
+
+    #side_widget{
+      width: 500px;
+      height: 200px;
+      margin: 0 auto;
+    }
 	</style>
 
 </head>
 <body>
     <h1>Hello thor!</h1>	
-  	
-    <div id="widget_test"></div>
+  	<h2>This is loaded in the page and on the side you have the one loaded by the button</h2>
+    <div id="side_widget"></div>
      
   	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   	<script type="text/javascript">
@@ -30,6 +36,8 @@
         _lopts.widget_url = "d321d6f7ccf98b51540ec9d933f20898af3bd71e";
         _lopts.modal_width = "417";
         _lopts.modal_height = "190";
+        _lopts.widget_container = "#side_widget";
+        _lopts.iframe_widget = true;
 
     var local_script = "localhost/tablebookings-widget/loader.js";
     var s3_script    = "d1u2f2r665j4oh.cloudfront.net/loader-v1.0.js";
@@ -40,6 +48,7 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(loader, s);
     })();
 	</script>       
+
 </body>
 </html>
 

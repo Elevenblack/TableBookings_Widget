@@ -8,13 +8,17 @@ Include the jQuery library above your &lt;/body&gt; tag
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-Then after adding the jQuery script add the following script below that:
+Then after adding the jQuery script add the following script below that. This will load the iframe in the page and also by the button.
+	
+	<div id="side_widget"></div>
 
   	<script type="text/javascript">
 	    var _lopts = _lopts || [];
 	        _lopts.widget_url = "d321d6f7ccf98b51540ec9d933f20898af3bd71e";
-        	_lopts.modal_width = "417";
-        	_lopts.modal_height = "190";
+	        _lopts.modal_width = "417";
+	        _lopts.modal_height = "190";
+	        _lopts.widget_container = "#side_widget";
+	        _lopts.iframe_widget = true;
 
 	    (function() {
 	        var loader = document.createElement('script'); loader.type = 'text/javascript'; loader.async = true;
