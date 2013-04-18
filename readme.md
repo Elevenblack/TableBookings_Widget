@@ -3,9 +3,9 @@ Table bookings widget loader
 
 Here it comes.
 
-It should be easy to add just place this code before the &lt;/body&rt; tag and it should add the button and make the thing work.
+It should be easy to add just place this code before the &lt;/body&gt; tag and it should add the button and make the thing work.
 
-
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript">
 	    var _lopts = _lopts || [];
 	        _lopts.domain = 'http://localhost';
