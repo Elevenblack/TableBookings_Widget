@@ -27,14 +27,16 @@
   	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   	<script type="text/javascript">
     var _lopts = _lopts || [];
-        _lopts.widget_domain = "http://localhost/tablebookings-widget/";
+        _lopts.widget_url = "d321d6f7ccf98b51540ec9d933f20898af3bd71e";
+        _lopts.modal_width = "417";
+        _lopts.modal_height = "190";
 
     var local_script = "localhost/tablebookings-widget/loader.js";
-    var s3_script    = "s3-eu-west-1.amazonaws.com/epic-plugins/loader.js";
+    var s3_script    = "d1u2f2r665j4oh.cloudfront.net/loader.js";
 
     (function() {
         var loader = document.createElement('script'); loader.type = 'text/javascript'; loader.async = true;
-        loader.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + s3_script;
+        loader.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + local_script;
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(loader, s);
     })();
 	</script>       

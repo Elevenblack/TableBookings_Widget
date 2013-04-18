@@ -12,12 +12,13 @@ Then after adding the jQuery script add the following script below that:
 
   	<script type="text/javascript">
 	    var _lopts = _lopts || [];
-	        _lopts.widget_domain = "the widget location domain";
-	        _lopts.widget_url    = "any other special parameters";
+	        _lopts.widget_url = "d321d6f7ccf98b51540ec9d933f20898af3bd71e";
+        	_lopts.modal_width = "417";
+        	_lopts.modal_height = "190";
 
 	    (function() {
 	        var loader = document.createElement('script'); loader.type = 'text/javascript'; loader.async = true;
-	        loader.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 's3-eu-west-1.amazonaws.com/epic-plugins/loader.js';
+	        loader.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'd1u2f2r665j4oh.cloudfront.net/loader.js';
 	        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(loader, s);
 	    })();
 	</script>   
@@ -40,6 +41,18 @@ The widget domain is the location of the widget.
 The widget url are the parameters that come after the domain if you have any for example ?id=333&do=match
 
 	_lopts.widget_url = "?id=2"
+
+### .modal_width
+
+You can specify the popup modal width that opens when you click the button on the side.
+
+	_lopts.modal_width = "400" //default is auto
+
+### .modal_height
+
+You can specify the popup modal height that opens when you click the button on the side.
+
+	_lopts.modal_height = "170" //default is auto
 
 ### .iframe_widget
 
