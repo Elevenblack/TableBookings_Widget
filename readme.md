@@ -89,4 +89,4 @@ Give here the element you want the iframe widget to be inserted in if you don't 
 	_lopts.widget_container = '.widget'
 
 
-## Made by: [Chocksy](http://github.com/Chocksy)
+### Made by: [Chocksy](http://github.com/Chocksy)
