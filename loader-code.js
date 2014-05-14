@@ -220,7 +220,7 @@ A self-contained modal library
 
   window.widgetLoader = (function(window, document) {
     "use strict";
-    var $s, addEventListener, addSideButton, addWidget, addWidgetListeners, assignModal, cssNumber, defaults, elements, error, isMobile, loadModule, make, openModal, trace;
+    var $s, addSideButton, addWidget, addWidgetListeners, assignModal, cssNumber, defaults, elements, error, isMobile, loadModule, make, openModal, trace;
     defaults = {
       widget_domain: '//app.tablebookings.com/widgets/',
       widget_url: '',
@@ -304,8 +304,6 @@ A self-contained modal library
       moduleInfo = JSON.stringify({
         url: window.TBopts.widget_url
       });
-      trace(moduleInfo);
-      console.log($s(elements.side_btn));
       $s(elements.side_btn).stylize({
         position: "fixed",
         top: "20%",
@@ -336,12 +334,9 @@ A self-contained modal library
       return /iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase());
     };
     $s = function(a, b) {
-      var elem, fas, get_by;
-      console.log(a);
+      var elem, fas;
       a = a.match(/^(\W)?(.*)/);
       elem = (b || document)["getElement" + (a[1] ? (a[1] === "#" ? "ById" : "sByClassName") : "sByTagName")](a[2]);
-      get_by = "getElement" + (a[1] ? (a[1] === "#" ? "ById" : "sByClassName") : "sByTagName");
-      trace("$ " + elem + "-" + get_by);
       fas = {
         elem: elem,
         data: function(dataAttr) {
@@ -369,10 +364,14 @@ A self-contained modal library
           return fas;
         },
         append: function(html) {
-          var c;
+          var c, el;
           c = document.createElement("p");
           c.innerHTML = html;
-          elem[0].appendChild(c.firstChild);
+          el = elem;
+          if (elem.length) {
+            el = elem[0];
+          }
+          el.appendChild(c.firstChild);
           return fas;
         },
         destroy: function() {
@@ -383,11 +382,10 @@ A self-contained modal library
         },
         on: function(eventName, handler) {
           var el;
-          trace("on:");
-          trace(elem);
-          trace(elem[0]);
-          trace("  .. ");
-          el = elem[0];
+          el = elem;
+          if (elem.length) {
+            el = elem[0];
+          }
           if (el) {
             if (el.addEventListener) {
               el.addEventListener(eventName, handler);
@@ -444,15 +442,6 @@ A self-contained modal library
       };
       return fas;
     };
-    addEventListener = function(el, eventName, handler) {
-      if (el.addEventListener) {
-        el.addEventListener(eventName, handler);
-      } else {
-        el.attachEvent("on" + eventName, function() {
-          handler.call(el);
-        });
-      }
-    };
     addWidgetListeners = function() {
       var eventMethod, eventer, messageEvent,
         _this = this;
@@ -475,7 +464,6 @@ A self-contained modal library
       }
     };
     return function(options) {
-      console.log(options);
       window.TBopts = make().extend({}, defaults, options);
       trace("constructor");
       if (window.TBopts.iframe_widget) {
@@ -486,7 +474,7 @@ A self-contained modal library
         addSideButton();
       }
       assignModal();
-      return console.log(window.TBopts);
+      return false;
     };
   })(window, document);
 

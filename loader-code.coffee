@@ -91,8 +91,6 @@ window.widgetLoader = ((window,document) ->
   addSideButton= ()->
     $s('body').append(elements.side_btn_content)
     moduleInfo = JSON.stringify({url:window.TBopts.widget_url})
-    trace moduleInfo
-    console.log $s(elements.side_btn)
     $s(elements.side_btn)
       .stylize(
               position:"fixed"
@@ -123,12 +121,11 @@ window.widgetLoader = ((window,document) ->
   isMobile= ->
     /iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase())
 
+  # ---- $s Method
+  # -- we are making below an utility section to get and manipulate DOM
   $s = (a, b) ->
-    console.log a
     a = a.match(/^(\W)?(.*)/)
     elem = (b or document)["getElement" + ((if a[1] then (if a[1] is "#" then "ById" else "sByClassName") else "sByTagName"))] a[2]
-    get_by = "getElement" + ((if a[1] then (if a[1] is "#" then "ById" else "sByClassName") else "sByTagName"))
-    trace "$ #{elem}-#{get_by}"
     fas = 
       elem: elem
       data : (dataAttr) ->
@@ -154,7 +151,9 @@ window.widgetLoader = ((window,document) ->
       append : (html)->
         c = document.createElement("p")
         c.innerHTML = html
-        elem[0].appendChild c.firstChild
+        el = elem
+        el = elem[0] if elem.length # we append just to first element
+        el.appendChild c.firstChild
         fas
         
       # Removes this element from the DOM
@@ -162,11 +161,8 @@ window.widgetLoader = ((window,document) ->
         document.body.removeChild elem unless !elem
         fas
       on   : (eventName,handler)->
-        trace "on:"
-        trace elem
-        trace elem[0]
-        trace "  .. "
-        el = elem[0]
+        el = elem
+        el = elem[0] if elem.length # we add handler just to first element
         if el
           if el.addEventListener
             el.addEventListener eventName, handler
@@ -176,6 +172,9 @@ window.widgetLoader = ((window,document) ->
               return
         return
     fas
+
+  # ---- make Method
+  # -- below is the utility method that we use to manipulate data
   make = ()->
     fas = 
       extend : (out) ->
@@ -194,8 +193,6 @@ window.widgetLoader = ((window,document) ->
           i++
         out
 
-      # fixSize
-
       getWindow: (type)->
         w = window
         d = document
@@ -206,16 +203,6 @@ window.widgetLoader = ((window,document) ->
         return x if type=='width'
         return y if type=='height'
     fas
-
-  addEventListener = (el, eventName, handler) ->
-    if el.addEventListener
-      el.addEventListener eventName, handler
-    else
-      el.attachEvent "on" + eventName, ->
-        handler.call el
-        return
-
-    return
   
   # ---- addWidgetListeners Method
   # -- we listen to the widget actions and make the actions acordingly
@@ -234,11 +221,9 @@ window.widgetLoader = ((window,document) ->
     window.console.log "widgetLoader: " + s  if window["console"] isnt `undefined`
   error = (s) ->
     window.console.error "widgetLoader: " + s  if window["console"] isnt `undefined`
+
   # A function for easily displaying a modal with the given content
   (options) ->
-    # getOption = (opt, defaultValue) ->
-    #   (if options[opt] is undefined then defaultValue else options[opt])
-    console.log options
     window.TBopts = make().extend({}, defaults,options)
     trace "constructor"
     if window.TBopts.iframe_widget
@@ -247,8 +232,7 @@ window.widgetLoader = ((window,document) ->
     if window.TBopts.side_btn
       addSideButton()
     assignModal()
-    console.log window.TBopts
-    # alert('da')
+    false
 
 )(window,document)
 
