@@ -4,8 +4,8 @@
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
-  	<meta charset="utf-8">
-  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>Reservations Widget Loader</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
@@ -13,41 +13,49 @@
 	<meta name="author" content="Chocksy,EpicCoders">
 
 	<style type="text/css">
-		body{
-			height: 1000px;
-		}	
-
-    #side_widget{
-      width: 500px;
-      height: 200px;
-      margin: 0 auto;
-    }
+		body{ height: 1000px; background: white;}	
+    #side_widget{ width: 690px; height: 600px; margin: 0 auto;}
 	</style>
 
 </head>
 <body>
-    <h1>Hello thor!</h1>	
-  	<h2>This is loaded in the page and on the side you have the one loaded by the button</h2>
-    <div id="side_widget"></div>
-     
-  	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  	<script type="text/javascript">
-    var _lopts = _lopts || [];
-        _lopts.widget_url = "d321d6f7ccf98b51540ec9d933f20898af3bd71e";
-        _lopts.modal_width = "417";
-        _lopts.modal_height = "190";
-        _lopts.widget_container = "#side_widget";
-        _lopts.iframe_widget = true;
+  <h1>Hello thor!</h1>	
+	<h2>This is loaded in the page and on the side you have the one loaded by the button</h2>
+  <div id="side_widget"></div>
+   
+  <a href="http://google.com" class='tb-modal' data-widget="3c28a4ec83cdd3c44ac1508601a02b7a1da321b6">apasal</a>
 
-    var local_script = "localhost/tablebookings-widget/loader.js";
-    var s3_script    = "d1u2f2r665j4oh.cloudfront.net/loader-v1.1.js";
+	<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+
+<script type='text/javascript'>
+(function (d, t) {
+  var bh = d.createElement(t), s = d.getElementsByTagName(t)[0];
+  bh.type = 'text/javascript';
+  bh.src = '//www.bugherd.com/sidebarv2.js?apikey=ueatdoxgsfpfcgeilf6wha';
+  s.parentNode.insertBefore(bh, s);
+  })(document, 'script');
+</script>
+    
+	<script type="text/javascript">
+    var _lopts = _lopts || [];
+        _lopts.widget_domain    = "//localhost:3000/widgets/"
+        // _lopts.widget_url       = "ebef605f063a37d6";
+        // _lopts.theme            = "light";
+        _lopts.modal_width      = "50%";
+        _lopts.modal_height     = 300;
+        // _lopts.widget_container = "#side_widget";
+        _lopts.custom_widget    = true;
+        _lopts.side_btn         = false;
+
+    var local_script = "tbwidget.dev/loader-code.js";
+    var s3_script    = "d1u2f2r665j4oh.cloudfront.net/loader-v2.0.js";
 
     (function() {
         var loader = document.createElement('script'); loader.type = 'text/javascript'; loader.async = true;
         loader.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + local_script;
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(loader, s);
     })();
-	</script>       
+  </script>       
 
 </body>
 </html>
