@@ -2,29 +2,33 @@
 
 Super nice jQuery plugin to load the bookings widget.
 
+## Notice for 2.0
+
+We don't need jQuery library included. Only if you want to use the previous 2.0 versions of the library then it's required to add it.
+
 ## Installation
 
-Include the jQuery library above your &lt;/body&gt; tag 
+Include the jQuery library above your &lt;/body&gt; tag for previous 2.0 versions 
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-Then after adding the jQuery script add the following script below that. This will load the iframe in the page and also by the button.
+Add the script below. This will load the iframe in the page and also by the button.
 	
 	<div id="side_widget"></div>
 
-  	<script type="text/javascript">
-	    var _lopts = _lopts || [];
-	        _lopts.widget_url = "d321d6f7ccf98b51540ec9d933f20898af3bd71e";
-	        _lopts.modal_width = "417";
-	        _lopts.modal_height = "190";
-	        _lopts.widget_container = "#side_widget";
-	        _lopts.iframe_widget = true;
+	<script type="text/javascript">
+    var _lopts = _lopts || [];
+        _lopts.widget_url = "d321d6f7ccf98b51540ec9d933f20898af3bd71e";
+        _lopts.modal_width = 417;
+        _lopts.modal_height = 190;
+        _lopts.widget_container = "#side_widget";
+        _lopts.iframe_widget = true;
 
-	    (function() {
-	        var loader = document.createElement('script'); loader.type = 'text/javascript'; loader.async = true;
-	        loader.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'd1u2f2r665j4oh.cloudfront.net/loader-v1.1.js';
-	        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(loader, s);
-	    })();
+    (function() {
+        var loader = document.createElement('script'); loader.type = 'text/javascript'; loader.async = true;
+        loader.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'd1u2f2r665j4oh.cloudfront.net/loader-v2.0.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(loader, s);
+    })();
 	</script>   
 
 
@@ -50,13 +54,13 @@ The widget url are the parameters that come after the domain if you have any for
 
 You can specify the popup modal width that opens when you click the button on the side.
 
-	_lopts.modal_width = "400" //default is auto
+	_lopts.modal_width = 400 //default is auto (must be number)
 
 ### .modal_height
 
 You can specify the popup modal height that opens when you click the button on the side.
 
-	_lopts.modal_height = "170" //default is auto
+	_lopts.modal_height = 170 //default is auto (must be number)
 
 ### .iframe_widget
 
