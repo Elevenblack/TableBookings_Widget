@@ -81,17 +81,6 @@
       "outputStyle" : 0,
       "fileType" : 32
     },
-    "\/zepto.js" : {
-      "ignoreWasSetByUser" : 1,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/zepto.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/zepto-ck.js",
-      "fileType" : 64
-    },
     "\/loader-code.coffee" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -103,6 +92,17 @@
       "outputAbbreviatedPath" : "\/loader-code.js",
       "outputStyle" : 0,
       "fileType" : 32
+    },
+    "\/zepto.js" : {
+      "ignoreWasSetByUser" : 1,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/zepto.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/zepto-ck.js",
+      "fileType" : 64
     },
     "\/loader-v1.7.js" : {
       "ignoreWasSetByUser" : 0,
@@ -193,7 +193,7 @@
     },
     "\/pico-modal.js" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/pico-modal.js",

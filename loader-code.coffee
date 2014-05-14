@@ -1,4 +1,12 @@
 #@codekit-prepend "picoModal"
+###
+Copyright (c) 2012 ElevenBlack
+Written by Ciocanel Razvan (chocksy.com)
+###
+
+###
+A self-contained loader library
+###
 window.widgetLoader = ((window,document) ->
   "use strict"
 
@@ -28,10 +36,8 @@ window.widgetLoader = ((window,document) ->
 
   elements= 
     side_btn_content:     '<div id="WDG_sideBtn_ctn"><a href="#" id="WDG_sideBtn">Reservations Widget</a></div>'
-    popup_widget_content: '<div id="WDG_popWidget"></div>'
     side_btn:             "#WDG_sideBtn"
-    popup_widget:         "#WDG_popWidget"
-
+    
   # ---- assignModal Method
   # -- assign modal method to element class
   assignModal= ->
@@ -50,10 +56,10 @@ window.widgetLoader = ((window,document) ->
   # -- a new step.
   loadModule= (e)->
     info_received = JSON.parse(e.data)
-    window.options.widget_url = info_received.url
+    window.TBopts.widget_url = info_received.url
 
     if isMobile()
-      window.open(window.options.widget_domain+window.options.widget_url,'_blank')
+      window.open(window.TBopts.widget_domain+window.TBopts.widget_url,'_blank')
     else
       openModal()
   
@@ -62,14 +68,14 @@ window.widgetLoader = ((window,document) ->
   openModal= ()->
     current_height = make().getWindow('height')
     current_width = make().getWindow('width')
-    widget_width = if window.options.modal_width then window.options.modal_width else current_width/1.2
-    widget_height = if window.options.modal_height then window.options.modal_height else current_height/1.6
+    widget_width = if window.TBopts.modal_width then window.TBopts.modal_width else current_width/1.2
+    widget_height = if window.TBopts.modal_height then window.TBopts.modal_height else current_height/1.6
 
     outerWidth = if typeof widget_width=="number" then current_width-widget_width else (current_width*parseInt(widget_width)/100)
     outerHeight= if typeof widget_height=="number" then current_height-widget_height else (current_height*parseInt(widget_height)/100)
     
     picoModal(
-      content: '<iframe id="WDG_widgetIframe" src="'+ window.options.widget_domain+window.options.widget_url+'" class="iframe-class" style="width:100%;height:100%;" frameborder="0" allowtransparency="true"></iframe>'
+      content: '<iframe id="WDG_widgetIframe" src="'+ window.TBopts.widget_domain+window.TBopts.widget_url+'" class="iframe-class" style="width:100%;height:100%;" frameborder="0" allowtransparency="true"></iframe>'
       modalStyles: 
         width: widget_width
         height: widget_height
@@ -79,8 +85,39 @@ window.widgetLoader = ((window,document) ->
         border: "5px solid #444"
         marginLeft: -outerWidth/2+"px"
     )
-    
-    
+   
+  # ---- addSideButton Method
+  # -- we add a fixed side button that has a click event on it for opening the widget
+  addSideButton= ()->
+    $s('body').append(elements.side_btn_content)
+    moduleInfo = JSON.stringify({url:window.TBopts.widget_url})
+    trace moduleInfo
+    console.log $s(elements.side_btn)
+    $s(elements.side_btn)
+      .stylize(
+              position:"fixed"
+              top: "20%"
+              left: "0"
+              width: "50px"
+              height: "157px"
+              background: "url(//d1u2f2r665j4oh.cloudfront.net/side_button.png)"
+              textIndent: "-9999px"
+              boxShadow: "2px 1px 4px #ccc"
+              borderRadius: "5px"
+      )
+    $s(elements.side_btn).on "click", (event)=> 
+      loadModule({data:moduleInfo})
+      event.preventDefault()
+    false
+
+  # ---- addWidget Method
+  # -- we add the iframe widget to the element specified when initializing the plugin
+  addWidget= ()->
+    url = window.TBopts.widget_domain+window.TBopts.widget_url+"?theme=#{window.TBopts.theme}"
+    widget_iframe_html = '<iframe id="iframe_widget" src="'+url+'" class="iframe-class" style="width:100%;height:100%;" frameborder="0" allowtransparency="true"></iframe>'
+    $el = $s(window.TBopts.widget_container)
+    $el.html(widget_iframe_html)  
+
   # ---- isMobile Method
   # -- check if the browser is a mobile browser
   isMobile= ->
@@ -90,7 +127,8 @@ window.widgetLoader = ((window,document) ->
     console.log a
     a = a.match(/^(\W)?(.*)/)
     elem = (b or document)["getElement" + ((if a[1] then (if a[1] is "#" then "ById" else "sByClassName") else "sByTagName"))] a[2]
-    trace "$ #{elem}"
+    get_by = "getElement" + ((if a[1] then (if a[1] is "#" then "ById" else "sByClassName") else "sByTagName"))
+    trace "$ #{elem}-#{get_by}"
     fas = 
       elem: elem
       data : (dataAttr) ->
@@ -124,14 +162,18 @@ window.widgetLoader = ((window,document) ->
         document.body.removeChild elem unless !elem
         fas
       on   : (eventName,handler)->
+        trace "on:"
+        trace elem
+        trace elem[0]
+        trace "  .. "
         el = elem[0]
-        if el.addEventListener
-          el.addEventListener eventName, handler
-        else
-          el.attachEvent "on" + eventName, ->
-            handler.call elem
-            return
-
+        if el
+          if el.addEventListener
+            el.addEventListener eventName, handler
+          else
+            el.attachEvent "on" + eventName, ->
+              handler.call elem
+              return
         return
     fas
   make = ()->
@@ -174,7 +216,20 @@ window.widgetLoader = ((window,document) ->
         return
 
     return
-    
+  
+  # ---- addWidgetListeners Method
+  # -- we listen to the widget actions and make the actions acordingly
+  # -- and example would be clicking on the submit button and loading the next step iframe 
+  # -- into a modal
+  addWidgetListeners= ()->
+    trace "adding listener for selecting the date for showing time"
+    eventMethod = (if window.addEventListener then "addEventListener" else "attachEvent")
+    eventer = window[eventMethod]
+    messageEvent = (if eventMethod is "attachEvent" then "onmessage" else "message")
+
+    # Listen to message from child window
+    eventer messageEvent, ((e)=> loadModule(e) ), false
+
   trace = (s) ->
     window.console.log "widgetLoader: " + s  if window["console"] isnt `undefined`
   error = (s) ->
@@ -184,16 +239,15 @@ window.widgetLoader = ((window,document) ->
     # getOption = (opt, defaultValue) ->
     #   (if options[opt] is undefined then defaultValue else options[opt])
     console.log options
-    window.options = make().extend({}, defaults,options)
+    window.TBopts = make().extend({}, defaults,options)
     trace "constructor"
-    $el = $s(window.options.widget_container)
-    if window.options.iframe_widget
+    if window.TBopts.iframe_widget
       addWidget()
       addWidgetListeners()
-    if window.options.side_btn
+    if window.TBopts.side_btn
       addSideButton()
     assignModal()
-    console.log window.options
+    console.log window.TBopts
     # alert('da')
 
 )(window,document)

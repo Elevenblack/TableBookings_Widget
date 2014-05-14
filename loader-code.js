@@ -207,9 +207,20 @@ A self-contained modal library
   */
 
 
+  /*
+  Copyright (c) 2012 ElevenBlack
+  Written by Ciocanel Razvan (chocksy.com)
+  */
+
+
+  /*
+  A self-contained loader library
+  */
+
+
   window.widgetLoader = (function(window, document) {
     "use strict";
-    var $s, addEventListener, assignModal, cssNumber, defaults, elements, error, isMobile, loadModule, make, openModal, trace;
+    var $s, addEventListener, addSideButton, addWidget, addWidgetListeners, assignModal, cssNumber, defaults, elements, error, isMobile, loadModule, make, openModal, trace;
     defaults = {
       widget_domain: '//app.tablebookings.com/widgets/',
       widget_url: '',
@@ -236,9 +247,7 @@ A self-contained modal library
     };
     elements = {
       side_btn_content: '<div id="WDG_sideBtn_ctn"><a href="#" id="WDG_sideBtn">Reservations Widget</a></div>',
-      popup_widget_content: '<div id="WDG_popWidget"></div>',
-      side_btn: "#WDG_sideBtn",
-      popup_widget: "#WDG_popWidget"
+      side_btn: "#WDG_sideBtn"
     };
     assignModal = function() {
       var _this = this;
@@ -260,9 +269,9 @@ A self-contained modal library
     loadModule = function(e) {
       var info_received;
       info_received = JSON.parse(e.data);
-      window.options.widget_url = info_received.url;
+      window.TBopts.widget_url = info_received.url;
       if (isMobile()) {
-        return window.open(window.options.widget_domain + window.options.widget_url, '_blank');
+        return window.open(window.TBopts.widget_domain + window.TBopts.widget_url, '_blank');
       } else {
         return openModal();
       }
@@ -271,12 +280,12 @@ A self-contained modal library
       var current_height, current_width, outerHeight, outerWidth, widget_height, widget_width;
       current_height = make().getWindow('height');
       current_width = make().getWindow('width');
-      widget_width = window.options.modal_width ? window.options.modal_width : current_width / 1.2;
-      widget_height = window.options.modal_height ? window.options.modal_height : current_height / 1.6;
+      widget_width = window.TBopts.modal_width ? window.TBopts.modal_width : current_width / 1.2;
+      widget_height = window.TBopts.modal_height ? window.TBopts.modal_height : current_height / 1.6;
       outerWidth = typeof widget_width === "number" ? current_width - widget_width : current_width * parseInt(widget_width) / 100;
       outerHeight = typeof widget_height === "number" ? current_height - widget_height : current_height * parseInt(widget_height) / 100;
       return picoModal({
-        content: '<iframe id="WDG_widgetIframe" src="' + window.options.widget_domain + window.options.widget_url + '" class="iframe-class" style="width:100%;height:100%;" frameborder="0" allowtransparency="true"></iframe>',
+        content: '<iframe id="WDG_widgetIframe" src="' + window.TBopts.widget_domain + window.TBopts.widget_url + '" class="iframe-class" style="width:100%;height:100%;" frameborder="0" allowtransparency="true"></iframe>',
         modalStyles: {
           width: widget_width,
           height: widget_height,
@@ -288,15 +297,51 @@ A self-contained modal library
         }
       });
     };
+    addSideButton = function() {
+      var moduleInfo,
+        _this = this;
+      $s('body').append(elements.side_btn_content);
+      moduleInfo = JSON.stringify({
+        url: window.TBopts.widget_url
+      });
+      trace(moduleInfo);
+      console.log($s(elements.side_btn));
+      $s(elements.side_btn).stylize({
+        position: "fixed",
+        top: "20%",
+        left: "0",
+        width: "50px",
+        height: "157px",
+        background: "url(//d1u2f2r665j4oh.cloudfront.net/side_button.png)",
+        textIndent: "-9999px",
+        boxShadow: "2px 1px 4px #ccc",
+        borderRadius: "5px"
+      });
+      $s(elements.side_btn).on("click", function(event) {
+        loadModule({
+          data: moduleInfo
+        });
+        return event.preventDefault();
+      });
+      return false;
+    };
+    addWidget = function() {
+      var $el, url, widget_iframe_html;
+      url = window.TBopts.widget_domain + window.TBopts.widget_url + ("?theme=" + window.TBopts.theme);
+      widget_iframe_html = '<iframe id="iframe_widget" src="' + url + '" class="iframe-class" style="width:100%;height:100%;" frameborder="0" allowtransparency="true"></iframe>';
+      $el = $s(window.TBopts.widget_container);
+      return $el.html(widget_iframe_html);
+    };
     isMobile = function() {
       return /iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase());
     };
     $s = function(a, b) {
-      var elem, fas;
+      var elem, fas, get_by;
       console.log(a);
       a = a.match(/^(\W)?(.*)/);
       elem = (b || document)["getElement" + (a[1] ? (a[1] === "#" ? "ById" : "sByClassName") : "sByTagName")](a[2]);
-      trace("$ " + elem);
+      get_by = "getElement" + (a[1] ? (a[1] === "#" ? "ById" : "sByClassName") : "sByTagName");
+      trace("$ " + elem + "-" + get_by);
       fas = {
         elem: elem,
         data: function(dataAttr) {
@@ -338,13 +383,19 @@ A self-contained modal library
         },
         on: function(eventName, handler) {
           var el;
+          trace("on:");
+          trace(elem);
+          trace(elem[0]);
+          trace("  .. ");
           el = elem[0];
-          if (el.addEventListener) {
-            el.addEventListener(eventName, handler);
-          } else {
-            el.attachEvent("on" + eventName, function() {
-              handler.call(elem);
-            });
+          if (el) {
+            if (el.addEventListener) {
+              el.addEventListener(eventName, handler);
+            } else {
+              el.attachEvent("on" + eventName, function() {
+                handler.call(elem);
+              });
+            }
           }
         }
       };
@@ -402,6 +453,17 @@ A self-contained modal library
         });
       }
     };
+    addWidgetListeners = function() {
+      var eventMethod, eventer, messageEvent,
+        _this = this;
+      trace("adding listener for selecting the date for showing time");
+      eventMethod = (window.addEventListener ? "addEventListener" : "attachEvent");
+      eventer = window[eventMethod];
+      messageEvent = (eventMethod === "attachEvent" ? "onmessage" : "message");
+      return eventer(messageEvent, (function(e) {
+        return loadModule(e);
+      }), false);
+    };
     trace = function(s) {
       if (window["console"] !== undefined) {
         return window.console.log("widgetLoader: " + s);
@@ -413,20 +475,18 @@ A self-contained modal library
       }
     };
     return function(options) {
-      var $el;
       console.log(options);
-      window.options = make().extend({}, defaults, options);
+      window.TBopts = make().extend({}, defaults, options);
       trace("constructor");
-      $el = $s(window.options.widget_container);
-      if (window.options.iframe_widget) {
+      if (window.TBopts.iframe_widget) {
         addWidget();
         addWidgetListeners();
       }
-      if (window.options.side_btn) {
+      if (window.TBopts.side_btn) {
         addSideButton();
       }
       assignModal();
-      return console.log(window.options);
+      return console.log(window.TBopts);
     };
   })(window, document);
 
