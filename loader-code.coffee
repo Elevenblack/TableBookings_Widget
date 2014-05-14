@@ -43,10 +43,8 @@ window.widgetLoader = ((window,document) ->
   assignModal= ->
     $s('.tb-modal').on 'click',(e)=>
       e.preventDefault()
-      console.log e.currentTarget
-      element = e.currentTarget #$s(e.currentTarget)
+      element = e.currentTarget 
       widget_token = element.getAttribute('data-widget')
-      console.log widget_token
       moduleInfo = JSON.stringify({url:widget_token})
       loadModule({data:moduleInfo})
 

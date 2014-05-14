@@ -254,10 +254,8 @@ A self-contained modal library
       return $s('.tb-modal').on('click', function(e) {
         var element, moduleInfo, widget_token;
         e.preventDefault();
-        console.log(e.currentTarget);
         element = e.currentTarget;
         widget_token = element.getAttribute('data-widget');
-        console.log(widget_token);
         moduleInfo = JSON.stringify({
           url: widget_token
         });

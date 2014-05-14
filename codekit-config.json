@@ -157,17 +157,6 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/loader-v1.6.js" : {
-      "ignoreWasSetByUser" : 1,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/loader-v1.6.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/loader-v1.6-ck.js",
-      "fileType" : 64
-    },
     "\/picoModal.coffee" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -180,15 +169,26 @@
       "outputStyle" : 0,
       "fileType" : 32
     },
-    "\/loader-v1.3.js" : {
-      "ignoreWasSetByUser" : 0,
+    "\/loader-v1.6.js" : {
+      "ignoreWasSetByUser" : 1,
       "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/loader-v1.3.js",
+      "inputAbbreviatedPath" : "\/loader-v1.6.js",
       "outputStyle" : 0,
       "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/loader-v1.3-ck.js",
+      "outputAbbreviatedPath" : "\/loader-v1.6-ck.js",
+      "fileType" : 64
+    },
+    "\/loader.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 1,
+      "inputAbbreviatedPath" : "\/loader.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/loader-v2.0.js",
       "fileType" : 64
     },
     "\/pico-modal.js" : {
@@ -202,15 +202,15 @@
       "outputAbbreviatedPath" : "\/pico-modal-ck.js",
       "fileType" : 64
     },
-    "\/loader.js" : {
+    "\/loader-v1.3.js" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
+      "ignore" : 1,
       "hidden" : 0,
-      "outputPathIsSetByUser" : 1,
-      "inputAbbreviatedPath" : "\/loader.js",
-      "outputStyle" : 1,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/loader-v1.3.js",
+      "outputStyle" : 0,
       "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/loader-v2.0.js",
+      "outputAbbreviatedPath" : "\/loader-v1.3-ck.js",
       "fileType" : 64
     },
     "\/json2.js" : {
