@@ -286,13 +286,18 @@ A self-contained modal library
       outerHeight = typeof widget_height === "number" ? current_height - widget_height : current_height * parseInt(widget_height) / 100;
       return picoModal({
         content: '<iframe id="WDG_widgetIframe" src="' + window.TBopts.widget_domain + window.TBopts.widget_url + '" class="iframe-class" style="width:100%;height:100%;" frameborder="0" allowtransparency="true"></iframe>',
+        overlayStyles: {
+          backgroundColor: "#333",
+          opacity: "0.3"
+        },
         modalStyles: {
           width: widget_width,
           height: widget_height,
           top: "20%",
           background: "#fff",
           boxShadow: "0px 0px 7px #444",
-          border: "5px solid #444",
+          border: "1px solid #444",
+          borderRadius: "3px",
           marginLeft: -outerWidth / 2 + "px"
         }
       });

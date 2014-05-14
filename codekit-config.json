@@ -208,7 +208,7 @@
       "hidden" : 0,
       "outputPathIsSetByUser" : 1,
       "inputAbbreviatedPath" : "\/loader.js",
-      "outputStyle" : 0,
+      "outputStyle" : 1,
       "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/loader-v2.0.js",
       "fileType" : 64
