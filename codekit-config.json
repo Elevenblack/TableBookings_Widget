@@ -114,17 +114,6 @@
       "outputStyle" : 0,
       "fileType" : 32
     },
-    "\/src\/loader-v1.9.js" : {
-      "ignoreWasSetByUser" : 1,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/src\/loader-v1.9.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/src\/loader-v1.9-ck.js",
-      "fileType" : 64
-    },
     "\/build\/loader-code.coffee" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -136,6 +125,17 @@
       "outputAbbreviatedPath" : "\/build\/loader-code.js",
       "outputStyle" : 0,
       "fileType" : 32
+    },
+    "\/src\/loader-v1.9.js" : {
+      "ignoreWasSetByUser" : 1,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/src\/loader-v1.9.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/src\/loader-v1.9-ck.js",
+      "fileType" : 64
     },
     "\/build\/old\/leanModal.coffee" : {
       "ignoreWasSetByUser" : 1,

@@ -157,21 +157,26 @@ window.widgetLoader = ((window,document) ->
         el = elem[0] if elem.length # we append just to first element
         el.appendChild c.firstChild
         fas
-        
+
       # Removes this element from the DOM
       destroy: ->
         document.body.removeChild elem unless !elem
         fas
       on   : (eventName,handler)->
-        el = elem
-        el = elem[0] if elem.length # we add handler just to first element
-        if el
-          if el.addEventListener
-            el.addEventListener eventName, handler
-          else
-            el.attachEvent "on" + eventName, ->
-              handler.call elem
-              return
+        if elem.length # we add handler just to first element
+          elements = elem
+        else
+          elements = [elem]
+        if elements.length>0
+          i = 0
+          while i < elements.length
+            el = elements[i]
+            if el.addEventListener
+              el.addEventListener eventName, handler
+            else
+              el.attachEvent "on" + eventName, ->
+                handler.call elem
+            i++
         return
     fas
 
