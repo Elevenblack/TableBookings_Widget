@@ -214,9 +214,11 @@ A self-contained modal library
 
   window.widgetLoader = (function(window, document) {
     "use strict";
-    var $s, addSideButton, addWidget, addWidgetListeners, assignModal, cssNumber, defaults, elements, error, isMobile, loadModule, make, openModal, trace;
+    var $s, addSideButton, addWidget, addWidgetListeners, assignModal, assignSpecialModal, cssNumber, defaults, elements, error, isMobile, loadModule, make, openModal, trace;
     defaults = {
       widget_domain: '//app.tablebookings.com/widgets/',
+      specials_domain: '//specials.tablebookings.com/',
+      domain: '//app.tablebookings.com/widgets/',
       widget_url: '',
       modal_width: false,
       modal_height: false,
@@ -259,12 +261,35 @@ A self-contained modal library
         };
       })(this));
     };
+    assignSpecialModal = function() {
+      return $s('.tb-modal-special').on('click', (function(_this) {
+        return function(e) {
+          var element, moduleInfo, restaurant_id, restaurant_slug, special_token;
+          e.preventDefault();
+          element = e.currentTarget;
+          special_token = element.getAttribute('data-special');
+          restaurant_id = element.getAttribute('data-restaurant');
+          restaurant_slug = element.getAttribute('data-restaurant-slug');
+          moduleInfo = JSON.stringify({
+            url: restaurant_id + '/' + restaurant_slug + '/' + special_token,
+            domain: window.TBopts.specials_domain
+          });
+          return loadModule({
+            data: moduleInfo
+          });
+        };
+      })(this));
+    };
     loadModule = function(e) {
       var info_received;
       info_received = JSON.parse(e.data);
       window.TBopts.widget_url = info_received.url;
+      window.TBopts.domain = window.TBopts.widget_domain;
+      if (info_received.domain !== void 0) {
+        window.TBopts.domain = info_received.domain;
+      }
       if (isMobile()) {
-        return window.open(window.TBopts.widget_domain + window.TBopts.widget_url, '_blank');
+        return window.open(window.TBopts.domain + window.TBopts.widget_url, '_blank');
       } else {
         return openModal();
       }
@@ -278,7 +303,7 @@ A self-contained modal library
       outerWidth = typeof widget_width === "number" ? current_width - widget_width : current_width * parseInt(widget_width) / 100;
       outerHeight = typeof widget_height === "number" ? current_height - widget_height : current_height * parseInt(widget_height) / 100;
       return picoModal({
-        content: '<iframe id="WDG_widgetIframe" src="' + window.TBopts.widget_domain + window.TBopts.widget_url + '" class="iframe-class" style="width:100%;height:100%;" frameborder="0" allowtransparency="true"></iframe>',
+        content: '<iframe id="WDG_widgetIframe" src="' + window.TBopts.domain + window.TBopts.widget_url + '" class="iframe-class" style="width:100%;height:100%;" frameborder="0" allowtransparency="true"></iframe>',
         overlayStyles: {
           backgroundColor: "#333",
           opacity: "0.3"
@@ -324,7 +349,7 @@ A self-contained modal library
     };
     addWidget = function() {
       var $el, url, widget_iframe_html;
-      url = window.TBopts.widget_domain + window.TBopts.widget_url + ("?theme=" + window.TBopts.theme);
+      url = window.TBopts.domain + window.TBopts.widget_url + ("?theme=" + window.TBopts.theme);
       widget_iframe_html = '<iframe id="iframe_widget" src="' + url + '" class="iframe-class" style="width:100%;height:100%;" frameborder="0" allowtransparency="true"></iframe>';
       $el = $s(window.TBopts.widget_container);
       return $el.html(widget_iframe_html);
@@ -480,6 +505,7 @@ A self-contained modal library
         addSideButton();
       }
       assignModal();
+      assignSpecialModal();
       return false;
     };
   })(window, document);

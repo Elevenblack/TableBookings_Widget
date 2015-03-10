@@ -23,8 +23,8 @@
 	<h2>This is loaded in the page and on the side you have the one loaded by the button</h2>
   <div id="side_widget"></div>
    
-  <a href="http://google.com" class='tb-modal' data-widget="3c28a4ec83cdd3c44ac1508601a02b7a1da321b6">apasal</a>
-
+  <a href="http://google.com" class='tb-modal' data-widget="c1eea070ec4dbb53">apasal</a>
+  <a href="http://yahoo.com" class='tb-modal-special' data-special="324d84" data-restaurant="1" data-restaurant-slug="chocksy-s-restaurant">Voucher loader</a>
 	<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
 
 <script type='text/javascript'>
@@ -38,8 +38,9 @@
     
 	<script type="text/javascript">
     var _lopts = _lopts || [];
-        _lopts.widget_domain    = "//localhost:3000/widgets/"
-        _lopts.widget_url       = "3c28a4ec83cdd3c44ac1508601a02b7a1da321b6";
+        _lopts.widget_domain    = "//table-bookings.dev/widgets/"
+        _lopts.widget_url       = "c1eea070ec4dbb53";
+        _lopts.specials_domain  = '//deals-tablebookings.dev/'
         // _lopts.theme            = "light";
         _lopts.modal_width      = "60%";
         _lopts.modal_height     = 500;
@@ -48,12 +49,12 @@
         _lopts.side_btn         = true;
         // _lopts.iframe_widget    = true;
 
-    var local_script = "tbwidget.dev/src/loader-v2.0.js";
+    var local_script = "tablebookings-widget.site/build/loader-min.js";
     var s3_script    = "d1u2f2r665j4oh.cloudfront.net/loader-v2.1.js";
 
     (function() {
         var loader = document.createElement('script'); loader.type = 'text/javascript'; loader.async = true;
-        loader.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + s3_script;
+        loader.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + local_script;
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(loader, s);
     })();
   </script>       
