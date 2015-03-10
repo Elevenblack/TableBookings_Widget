@@ -38,6 +38,14 @@ Add the script below. This will load the iframe in the page and also by the butt
 
 You have to specify this "_lopts" array that holds the options to configure that plugin. We can also set these as defaults in the plugin so this won't be required.
 
+### .specials_domain
+
+You can specify the domain of the specials website to view and show them on the modal when setting the following settings on an url:
+
+```<a href="http://yahoo.com" class='tb-modal-special' data-special="324d84" data-restaurant="1" data-restaurant-slug="chocksy-s-restaurant">Voucher loader</a>```
+
+__Note__: the specials is only openable from links or buttons and not showable via iframe. The ```.tb-modal-special``` class is required to assign the click action on the element.
+
 ### .widget_domain
 
 The widget domain is the location of the widget.
