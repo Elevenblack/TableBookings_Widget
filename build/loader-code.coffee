@@ -4,6 +4,18 @@ Copyright (c) 2012 ElevenBlack
 Written by Ciocanel Razvan (chocksy.com)
 ###
 
+Array::remove = ->
+  what = undefined
+  a = arguments
+  L = a.length
+  ax = undefined
+  while L and @length
+    what = a[--L]
+    while (ax = @indexOf(what)) != -1
+      @splice ax, 1
+  this
+
+
 ###
 A self-contained loader library
 ###
@@ -20,7 +32,7 @@ window.widgetLoader = ((window,document) ->
     iframe_widget:  false
     iframe_width:   "100%"
     iframe_height:  "100%"
-    side_btn:       true 
+    side_btn:       false
   
   cssNumber=
     "columnCount": true,
@@ -180,10 +192,11 @@ window.widgetLoader = ((window,document) ->
         document.body.removeChild elem unless !elem
         fas
       on   : (eventName,handler)->
-        if elem.length # we add handler just to first element
+        elements = []
+        if elem.length>1 # we add handler just to first element
           elements = elem
-        else
-          elements = [elem]
+        else if elem.length==1
+          elements = [elem[0]]
         if elements.length>0
           i = 0
           while i < elements.length
