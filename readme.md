@@ -26,7 +26,7 @@ Add the script below. This will load the iframe in the page and also by the butt
 
     (function() {
         var loader = document.createElement('script'); loader.type = 'text/javascript'; loader.async = true;
-        loader.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'd1u2f2r665j4oh.cloudfront.net/loader-v2.0.js';
+        loader.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'd1u2f2r665j4oh.cloudfront.net/loader-v2.5.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(loader, s);
     })();
 	</script>   
