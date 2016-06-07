@@ -25,6 +25,7 @@ window.widgetLoader = ((window,document) ->
   defaults=
     widget_domain:  '//app.tablebookings.com/widgets/' # the widget domain/ tablebookings
     specials_domain:'//specials.tablebookings.com/' # the specials domain
+    vouchers_domain:'giftvoucher.online'
     domain:         '//app.tablebookings.com/widgets/' # the default domain value (this will change with execution)
     widget_url:     ''
     modal_width:    false
@@ -72,6 +73,16 @@ window.widgetLoader = ((window,document) ->
       restaurant_id = element.getAttribute('data-restaurant')
       restaurant_slug = element.getAttribute('data-restaurant-slug')
       moduleInfo = JSON.stringify({url: restaurant_id + '/' + restaurant_slug + '/' + special_token, domain: window.TBopts.specials_domain })
+      loadModule({data:moduleInfo})
+
+  # ---- assignVoucherModal Method
+  # -- assign modal method to element class
+  assignVoucherModal= ->
+    $s('.tb-modal-voucher').on 'click',(e)=>
+      e.preventDefault()
+      element = e.currentTarget
+      restaurant_slug = element.getAttribute('data-restaurant-slug')
+      moduleInfo = JSON.stringify({url: '', domain: '//' + restaurant_slug + '.' + window.TBopts.vouchers_domain })
       loadModule({data:moduleInfo})
 
   # ---- loadModule Method
@@ -270,6 +281,7 @@ window.widgetLoader = ((window,document) ->
       addSideButton()
     assignModal()
     assignSpecialModal()
+    assignVoucherModal()
     false
 
 )(window,document)
