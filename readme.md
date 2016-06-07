@@ -46,6 +46,14 @@ You can specify the domain of the specials website to view and show them on the 
 
 __Note__: the specials is only openable from links or buttons and not showable via iframe. The ```.tb-modal-special``` class is required to assign the click action on the element.
 
+### .vouchers_domain
+
+You can specify the domain of the voucher.online website to view and show them on the modal when setting the following settings on an url:
+
+```<a href="http://yahoo.com" class='tb-modal-voucher' data-restaurant-slug="chocksy-s-restaurant">Voucher loader</a>```
+
+__Note__: the voucher.online is only openable from links or buttons and not showable via iframe. The ```.tb-modal-voucher``` class is required to assign the click action on the element.
+
 ### .widget_domain
 
 The widget domain is the location of the widget.
