@@ -1,6 +1,6 @@
 # Bookings widget loader
 
-Super nice jQuery plugin to load the bookings widget.
+Super nice plugin to load the bookings widget for the website (www.tablebookings.com)[www.tablebookings.com].
 
 ## Notice for 2.0
 
@@ -8,7 +8,7 @@ We don't need jQuery library included. Only if you want to use the previous 2.0 
 
 ## Installation
 
-Include the jQuery library above your &lt;/body&gt; tag for previous 2.0 versions 
+Include the jQuery library above your &lt;/body&gt; tag for __previous 2.0 versions__
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
@@ -17,7 +17,7 @@ Add the script below. This will load the iframe in the page and also by the butt
 	<div id="side_widget"></div>
 
 	<script type="text/javascript">
-    var _lopts = _lopts || [];
+    	var _lopts = _lopts || [];
         _lopts.widget_url = "d321d6f7ccf98b51540ec9d933f20898af3bd71e";
         _lopts.modal_width = 417;
         _lopts.modal_height = 190;
@@ -26,11 +26,12 @@ Add the script below. This will load the iframe in the page and also by the butt
 
     (function() {
         var loader = document.createElement('script'); loader.type = 'text/javascript'; loader.async = true;
-        loader.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'd1u2f2r665j4oh.cloudfront.net/loader-v2.5.js';
+        loader.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'd1u2f2r665j4oh.cloudfront.net/loader-v2.6.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(loader, s);
     })();
 	</script>   
 
+The direct link to the script is here: `http://d1u2f2r665j4oh.cloudfront.net/loader-v2.6.js` but you still need to set the script details as shown above
 
 ## Configuration
 
